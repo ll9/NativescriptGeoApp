@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link href="./src/style/fontawesome.css" rel="stylesheet">
+    <link href="./src/style/ol.css" rel="stylesheet">
+    <link href="./src/style/style.css" rel="stylesheet">
+
+
+    <script src="./src/js/ol.js"></script>
+    <title>OpenLayers example</title>
+</head>
+
+<body>
+    <div id="map" class="map">
+        <div class="center map-marker">
+            <i class="fas fa-map-marker"></i>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([37.41, 8.82]),
+                zoom: 4
+            })
+        });
+    </script>
+</body>
+
+</html>
