@@ -60,6 +60,7 @@ module.exports = env => {
     console.log(`Bundling application for entryPath ${entryPath}...`);
 
     const config = {
+        
         mode: mode,
         context: appFullPath,
         externals,
@@ -111,7 +112,7 @@ module.exports = env => {
             "fs": "empty",
             "__dirname": false,
         },
-        devtool: "none",
+        devtool: "source-maps",
         optimization: {
             splitChunks: {
                 cacheGroups: {
@@ -128,22 +129,22 @@ module.exports = env => {
                     },
                 },
             },
-            minimize: Boolean(production),
+            minimize: false ,//Boolean(production),
             minimizer: [
                 new UglifyJsPlugin({
                     parallel: true,
                     cache: true,
-                    uglifyOptions: {
-                        output: {
-                            comments: false,
-                        },
-                        compress: {
-                            // The Android SBG has problems parsing the output
-                            // when these options are enabled
-                            'collapse_vars': platform !== "android",
-                            sequences: platform !== "android",
-                        },
-                    },
+                    // uglifyOptions: {
+                    //     output: {
+                    //         comments: false,
+                    //     },
+                    //     compress: {
+                    //         // The Android SBG has problems parsing the output
+                    //         // when these options are enabled
+                    //         'collapse_vars': platform !== "android",
+                    //         sequences: platform !== "android",
+                    //     },
+                    // },
                 }),
             ],
         },
