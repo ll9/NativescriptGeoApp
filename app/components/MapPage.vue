@@ -1,6 +1,6 @@
 <template>
     <Page class="page" @loaded="pageLoaded">
-        <SDActionBar disable-back></SDActionBar>
+        <SDActionBar></SDActionBar>
         <StackLayout>
             <WebView id="webView"></WebView>
             <Button text="Weiter" @tap="navigateForward"></Button>
@@ -12,7 +12,8 @@
 import Vue from "vue";
 import * as webViewInterfaceModule from "nativescript-webview-interface";
 import MapViewservice from "../utils/MapService";
-import SDActionBar from './SDActionBar';
+import DataPage from './DataPage';
+import SDActionBar from "./SDActionBar";
 
 const WWW_ROOT = "~/wwwroot/index.html";
 
@@ -39,10 +40,11 @@ export default Vue.extend({
       await this.MapViewservice.setCoordinates();
     },
     navigateForward() {
-      this.MapViewservice.getCoordinates((coordinates) => {
+      this.MapViewservice.getCoordinates(coordinates => {
         // TODO: navigate to next page and persist data
         alert(coordinates);
-      })
+        this.$navigateTo(DataPage);
+      });
     }
   },
   components: {
