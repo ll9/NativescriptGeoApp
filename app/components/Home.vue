@@ -1,8 +1,6 @@
 <template>
     <Page class="page" @loaded="pageLoaded">
-        <ActionBar class="action-bar">
-            <Label class="action-bar-title" text="Home"></Label>
-        </ActionBar>
+        <SDActionBar disable-back></SDActionBar>
         <StackLayout>
             <WebView id="webView"></WebView>
             <Button text="Weiter" @tap="navigateForward"></Button>
@@ -14,6 +12,7 @@
 import Vue from "vue";
 import * as webViewInterfaceModule from "nativescript-webview-interface";
 import MapViewservice from "../utils/MapService";
+import SDActionBar from './SDActionBar';
 
 const WWW_ROOT = "~/wwwroot/index.html";
 
@@ -45,6 +44,9 @@ export default Vue.extend({
         alert(coordinates);
       })
     }
+  },
+  components: {
+    SDActionBar
   }
 });
 </script>
