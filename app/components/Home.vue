@@ -5,60 +5,48 @@
         </ActionBar>
         <StackLayout>
             <WebView id="webView"></WebView>
-            <Button text="Get location" @tap="buttonGetLocationTap"></Button>
+            <Button text="Weiter" @tap="navigateForward"></Button>
         </StackLayout>
     </Page>
 </template>
 
 <script>
-var geolocation = require("nativescript-geolocation");
-var webViewInterfaceModule = require("nativescript-webview-interface");
-var oWebViewInterface;
+import Vue from "vue";
+import * as webViewInterfaceModule from "nativescript-webview-interface";
+import MapViewservice from "../utils/MapService";
 
-export default {
-  data: function() {
-    return {};
+const WWW_ROOT = "~/wwwroot/index.html";
+
+export default Vue.extend({
+  data() {
+    return {
+      /** @type {MapViewservice} */
+      MapViewservice: null
+    };
+  },
+  computed: {
+    any: () => {}
   },
   methods: {
     pageLoaded(args) {
       let page = args.object;
-      this.setupWebViewInterface(page);
+      let webView = page.getViewById("webView");
+      if (webView.android) {
+        webView.android.getSettings().setBuiltInZoomControls(false);
+      }
+      this.MapViewservice = new MapViewservice(webView, WWW_ROOT);
     },
-
-    // Initializes plugin with a webView
-    setupWebViewInterface(page) {
-      var webView = page.getViewById("webView");
-      oWebViewInterface = new webViewInterfaceModule.WebViewInterface(
-        webView,
-        "~/wwwroot/index.html"
-      );
+    async buttonGetLocationTap(args) {
+      await this.MapViewservice.setCoordinates();
     },
-    buttonGetLocationTap(args) {
-      var location = geolocation
-        .getCurrentLocation({
-          desiredAccuracy: 3,
-          updateDistance: 10,
-          maximumAge: 20000,
-          timeout: 20000
-        })
-        .then(
-          function(loc) {
-            if (loc) {
-              oWebViewInterface.callJSFunction(
-                "setCoordinates",
-                { coordinates: [loc.longitude, loc.latitude] },
-                function(result) {
-                }
-              );
-            }
-          },
-          function(e) {
-            console.log("Error: " + e.message);
-          }
-        );
+    navigateForward() {
+      this.MapViewservice.getCoordinates((coordinates) => {
+        // TODO: navigate to next page and persist data
+        alert(coordinates);
+      })
     }
   }
-};
+});
 </script>
 
 <style scoped lang="scss">

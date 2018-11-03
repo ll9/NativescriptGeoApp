@@ -3,12 +3,12 @@
 
 <head>
     <link href="./src/style/fontawesome.css" rel="stylesheet">
-    <link href="./src/style/ol.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/css/ol.css" type="text/css">
     <link href="./src/style/style.css" rel="stylesheet">
 
 
     <script src="./src/js/external_modules/nativescript-webview-interface.js"></script>
-    <script src="./src/js/external_modules/ol.js"></script>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
     <title>OpenLayers example</title>
 </head>
 
@@ -16,6 +16,11 @@
     <div id="map" class="map">
         <div class="center map-marker">
             <i class="fas fa-map-marker"></i>
+        </div>
+        <div class="icon-bar">
+            <button id="location-button">
+                <i class="fas fa-location-arrow"></i>
+            </button>
         </div>
     </div>
 </body>
