@@ -3,12 +3,12 @@
         <FlexboxLayout>
         <StackLayout class="form">
 
-            <TextField hint="Email" keyboardType="email" autocorrect="false"
+            <TextField v-model="email" hint="Email" keyboardType="email" autocorrect="false"
                 autocapitalizationType="none" class="input input-border" />
-            <TextField hint="Passwort" secure="true" class="input input-border" />
+            <TextField v-model="password" hint="Passwort" secure="true" class="input input-border" />
 
-            <Button text="Anmelden" class="btn btn-primary" />
-            <Button text="Registrieren" />
+            <Button @tap="login" text="Anmelden" class="btn btn-primary" />
+            <Button @tap="register" text="Registrieren" />
 
         </StackLayout>
     </FlexboxLayout>
@@ -20,10 +20,15 @@ import Vue from "vue";
 import SDActionBar from "./SDActionBar";
 import MapPage from "./MapPage";
 import { navigationOptions } from "../utils/settings";
+import AuthService from '../utils/AuthService';
 
 export default Vue.extend({
   data() {
-    return {};
+    return {
+      email: '',
+      password: '',
+      AuthService: new AuthService()
+    };
   },
   computed: {
     any: () => {}
@@ -31,6 +36,12 @@ export default Vue.extend({
   methods: {
     navigateForward() {
       this.$navigateTo(MapPage, navigationOptions);
+    },
+    login() {
+      this.AuthService.login(this.email, this.password);
+    },
+    register() {
+      this.AuthService.register(this.email, this.password);
     }
   },
   components: {
