@@ -12,10 +12,12 @@ export default class MapViewService {
     /**
      * @param {object} args Webview args
      * @param {string} root Path of the source Web Directory
+     * @param {() => any}
      */
-    constructor(webView, root) {
+    constructor(webView, root, navigateCallback) {
         this.webView = webView;
         this.root = root;
+        this.navigateCallback = navigateCallback
 
         this.oWebViewInterface = new webViewInterfaceModule.WebViewInterface(webView, root);
         this.initEventListeners();
@@ -24,6 +26,20 @@ export default class MapViewService {
     initEventListeners() {
         this.oWebViewInterface.on('request-coordinates', (evt) => {
             this.setCoordinates();
+        })
+
+        this.oWebViewInterface.on('coordinates-set', (coordinates) => {
+            this.navigateCallback(coordinates);
+        });
+    }
+
+    /**
+     * 
+     * @param {(coordinates: float[]) => void} callback 
+     */
+    getCoordinates(callback) {
+        this.oWebViewInterface.callJSFunction('getCoordinates', null, (resp) => {
+            callback(resp);
         })
     }
 
@@ -38,13 +54,5 @@ export default class MapViewService {
         this.oWebViewInterface.callJSFunction('setCoordinates', [coordinates])
     }
 
-    /**
-     * 
-     * @param {(coordinates: float[]) => void} callback 
-     */
-    getCoordinates(callback) {
-        this.oWebViewInterface.callJSFunction('getCoordinates', null, (resp) => {
-            callback(resp);
-        }, )
-    }
+
 }

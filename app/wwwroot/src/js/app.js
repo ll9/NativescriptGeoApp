@@ -12,16 +12,17 @@ var map = new ol.Map({
     })
 });
 
+const oWebViewInterface = window.nsWebViewInterface;
+
 function getCoordinates() {
     let coordinates = ol.proj.transform(map.getView().getCenter(), 'EPSG:3857' ,'EPSG:4326')
+    oWebViewInterface.emit('coordinates-set', coordinates);
     return coordinates;
 }
 function setCoordinates(_coordinates) {
     let coordinates = ol.proj.fromLonLat(_coordinates)
     map.getView().animate({center: coordinates, zoom: 17});
 }
-
-const oWebViewInterface = window.nsWebViewInterface;
 
 document.addEventListener('DOMContentLoaded', () => {
     let locationButton = document.getElementById("location-button");
