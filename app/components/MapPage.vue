@@ -40,7 +40,9 @@ export default Vue.extend({
       await this.MapViewservice.setCoordinates();
     },
     navigateForward() {
+      alert("pre")
       this.MapViewservice.getCoordinates(coordinates => {
+      alert("after")
         // TODO: navigate to next page and persist data
         alert(coordinates);
         this.$navigateTo(DataPage);
