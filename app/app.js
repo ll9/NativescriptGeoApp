@@ -1,6 +1,6 @@
 import Vue from "nativescript-vue";
 
-import LoginPage from "./components/LoginPage";
+import LoginPage from "./components/MapPage";
 
 new Vue({
 

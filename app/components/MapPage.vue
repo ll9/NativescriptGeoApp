@@ -13,10 +13,11 @@ import Vue from "vue";
 
 import * as webViewInterfaceModule from "nativescript-webview-interface";
 
+import LoginPage from "./LoginPage";
 import DataPage from "./DataPage";
 import SDActionBar from "./SDActionBar";
 import MapViewservice from "../utils/MapService";
-import { navigationOptions } from '../utils/settings'
+import { navigationOptions } from "../utils/settings";
 
 const WWW_ROOT = "~/wwwroot/index.html";
 
@@ -32,6 +33,7 @@ export default Vue.extend({
   },
   methods: {
     pageLoaded(args) {
+      this.$showModal(LoginPage);
       let page = args.object;
       let webView = page.getViewById("webView");
       if (webView.android) {
