@@ -37,9 +37,15 @@ export default Vue.extend({
       this.MapViewservice = new MapViewservice(
         webView,
         WWW_ROOT,
-        (coordinates) => {
+        coordinates => {
           alert(coordinates);
-          this.$navigateTo(DataPage);
+          this.$navigateTo(DataPage, {
+            transition: {
+              name: "slide",
+              duration: 380,
+              curve: "easeIn"
+            }
+          });
         }
       );
     },

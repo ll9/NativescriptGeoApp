@@ -9,8 +9,8 @@
 
 <script>
 import Vue from "vue";
-import SDActionBar from './SDActionBar'
-import MapPage from './MapPage';
+import SDActionBar from "./SDActionBar";
+import MapPage from "./MapPage";
 
 export default Vue.extend({
   data() {
@@ -20,12 +20,18 @@ export default Vue.extend({
     any: () => {}
   },
   methods: {
-      navigateForward() {
-          this.$navigateTo(MapPage)
-      }
+    navigateForward() {
+      this.$navigateTo(MapPage, {
+        transition: {
+          name: "slide",
+          duration: 380,
+          curve: "easeIn"
+        }
+      });
+    }
   },
   components: {
-      SDActionBar
+    SDActionBar
   }
 });
 </script>

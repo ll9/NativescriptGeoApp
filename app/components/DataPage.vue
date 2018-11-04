@@ -21,7 +21,13 @@ export default Vue.extend({
   },
   methods: {
     navigateForward() {
-      this.$navigateTo(FinalPage);
+      this.$navigateTo(FinalPage, {
+        transition: {
+          name: "slide",
+          duration: 380,
+          curve: "easeIn"
+        }
+      });
     }
   },
   components: {
