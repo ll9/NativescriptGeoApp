@@ -11,6 +11,8 @@
 import Vue from "vue";
 import SDActionBar from "./SDActionBar";
 import FinalPage from "./FinalPage";
+import { navigationOptions } from '../utils/settings'
+
 
 export default Vue.extend({
   data() {
@@ -21,13 +23,7 @@ export default Vue.extend({
   },
   methods: {
     navigateForward() {
-      this.$navigateTo(FinalPage, {
-        transition: {
-          name: "slide",
-          duration: 380,
-          curve: "easeIn"
-        }
-      });
+      this.$navigateTo(FinalPage, navigationOptions);
     }
   },
   components: {

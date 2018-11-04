@@ -11,6 +11,7 @@
 import Vue from "vue";
 import SDActionBar from "./SDActionBar";
 import MapPage from "./MapPage";
+import { navigationOptions } from '../utils/settings'
 
 export default Vue.extend({
   data() {
@@ -21,13 +22,7 @@ export default Vue.extend({
   },
   methods: {
     navigateForward() {
-      this.$navigateTo(MapPage, {
-        transition: {
-          name: "slide",
-          duration: 380,
-          curve: "easeIn"
-        }
-      });
+      this.$navigateTo(MapPage, navigationOptions);
     }
   },
   components: {

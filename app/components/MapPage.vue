@@ -10,10 +10,13 @@
 
 <script>
 import Vue from "vue";
+
 import * as webViewInterfaceModule from "nativescript-webview-interface";
-import MapViewservice from "../utils/MapService";
+
 import DataPage from "./DataPage";
 import SDActionBar from "./SDActionBar";
+import MapViewservice from "../utils/MapService";
+import { navigationOptions } from '../utils/settings'
 
 const WWW_ROOT = "~/wwwroot/index.html";
 
@@ -39,13 +42,7 @@ export default Vue.extend({
         WWW_ROOT,
         coordinates => {
           alert(coordinates);
-          this.$navigateTo(DataPage, {
-            transition: {
-              name: "slide",
-              duration: 380,
-              curve: "easeIn"
-            }
-          });
+          this.$navigateTo(DataPage, navigationOptions);
         }
       );
     },
